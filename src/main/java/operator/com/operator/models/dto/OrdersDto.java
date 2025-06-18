@@ -13,7 +13,7 @@ import lombok.ToString;
 @NoArgsConstructor
 @Builder
 @ToString
-public class ProviderDto {
+public class OrdersDto {
 
     private String product;
 

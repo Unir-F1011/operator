@@ -51,7 +51,14 @@ public class Shipments {
     private Integer payment;
 
     public void update(ShipmentsDto shipmentDto) {
-        
+        this.address = shipmentDto.getAddress();
+        this.category = shipmentDto.getCategory();
+        this.color = shipmentDto.getColor();
+        this.descount = shipmentDto.getDescount();
+        this.name = shipmentDto.getName();
+        this.payment = shipmentDto.getPayment();
+        this.total = shipmentDto.getTotal();
+        this.product = shipmentDto.getProduct();
     }
 
 }

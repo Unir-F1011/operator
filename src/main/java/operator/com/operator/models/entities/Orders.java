@@ -11,16 +11,16 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
-import operator.com.operator.models.dto.ProviderDto;
+import operator.com.operator.models.dto.OrdersDto;
 
 @Entity
-@Table(name = "provider")
+@Table(name = "orders")
 @Getter
 @Setter
 @AllArgsConstructor
 @Builder
 @ToString
-public class Provider {
+public class Orders {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -53,8 +53,16 @@ public class Provider {
     private String tel;
 
 
-    public void update(ProviderDto provDto) {
-
+    public void update(OrdersDto provDto) {
+        this.category = provDto.getCategory();
+        this.color = provDto.getColor();
+        this.email = provDto.getEmail();
+        this.manufacturer = this.getManufacturer();
+        this.name = this.getName();
+        this.product = this.getProduct();
+        this.tel = this.getTel();
+        this.total = this.getTotal();
+        this.price = this.getPrice(); 
     }
 
 
