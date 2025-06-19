@@ -7,18 +7,16 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import operator.com.operator.models.dto.OrdersDto;
 import operator.com.operator.models.dto.ShipmentsDto;
 import operator.com.operator.models.entities.Orders;
 import operator.com.operator.models.entities.Shipments;
-import operator.com.operator.service.InnerOperaor;
-
-
+import operator.com.operator.service.InnerOperator;
 
 @RestController
 @RequiredArgsConstructor
@@ -26,11 +24,10 @@ import operator.com.operator.service.InnerOperaor;
 @Slf4j
 public class OperatorAPI {
 
-    private final InnerOperaor operator;
-
+    private final InnerOperator operator;
 
     @PostMapping("/v1/orders")
-    public ResponseEntity<Orders> makeOrder(@RequestBody OrdersDto provider) {
+    public ResponseEntity<Orders> makeOrder(@Valid @RequestBody  OrdersDto provider) {
         Orders orders = operator.createOrder(provider);
         if (orders != null) {
             return ResponseEntity.status(HttpStatus.CREATED).body(orders);
@@ -45,7 +42,7 @@ public class OperatorAPI {
     }
 
     @PostMapping("/v1/shipments")
-    public ResponseEntity<Shipments> sendShipment(@RequestBody ShipmentsDto shipment) {
+    public ResponseEntity<Shipments> sendShipment(@Valid @RequestBody ShipmentsDto shipment) {
         operator.createShipments(shipment);
         return ResponseEntity.status(HttpStatus.CREATED).body(null);
     }

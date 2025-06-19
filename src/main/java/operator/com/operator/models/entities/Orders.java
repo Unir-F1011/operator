@@ -1,5 +1,7 @@
 package operator.com.operator.models.entities;
 
+import java.util.UUID;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -22,8 +24,9 @@ import operator.com.operator.models.dto.OrdersDto;
 @ToString
 public class Orders {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "id", updatable = false, nullable = false)
+    private UUID id;
     
     @Column(name = "product")
     private String product;

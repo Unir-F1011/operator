@@ -11,7 +11,6 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
-import lombok.extern.java.Log;
 import operator.com.operator.models.dto.ShipmentsDto;
 
 @Entity
@@ -23,8 +22,9 @@ import operator.com.operator.models.dto.ShipmentsDto;
 @ToString
 public class Shipments {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY) 
-    private Log id; 
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "id", updatable = false, nullable = false)
+    private String id; 
 
     @Column(name = "product")
     private String product;
