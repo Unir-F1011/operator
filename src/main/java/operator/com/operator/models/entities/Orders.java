@@ -13,7 +13,7 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
-import operator.com.operator.models.dto.OrdersDto;
+import operator.com.operator.models.consts.Consts;
 
 @Entity
 @Table(name = "orders")
@@ -25,48 +25,33 @@ import operator.com.operator.models.dto.OrdersDto;
 public class Orders {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "id", updatable = false, nullable = false)
+    @Column(name = Consts.ID, updatable = false, nullable = false)
     private UUID id;
     
-    @Column(name = "product")
+    @Column(name = Consts.PRODUCT)
     private String product;
 
-    @Column(name = "color")
+    @Column(name = Consts.COLOR)
     private String color; 
 
-    @Column(name = "category") 
+    @Column(name = Consts.CATEGORY) 
     private String category; 
 
-    @Column(name = "price")
+    @Column(name = Consts.PRICE)
     private Integer price;
 
-    @Column(name = "manufacturer")
+    @Column(name = Consts.MANUFACTURER)
     private String manufacturer;
 
-    @Column(name = "total")
+    @Column(name = Consts.TOTAL)
     private Integer total;
 
-    @Column(name = "name")
+    @Column(name = Consts.NAME)
     private String name;
 
-    @Column(name = "email")
+    @Column(name = Consts.EMAIL)
     private String email;
 
-    @Column(name = "tel")
+    @Column(name = Consts.TEL)
     private String tel;
-
-
-    public void update(OrdersDto provDto) {
-        this.category = provDto.getCategory();
-        this.color = provDto.getColor();
-        this.email = provDto.getEmail();
-        this.manufacturer = this.getManufacturer();
-        this.name = this.getName();
-        this.product = this.getProduct();
-        this.tel = this.getTel();
-        this.total = this.getTotal();
-        this.price = this.getPrice(); 
-    }
-
-
 }

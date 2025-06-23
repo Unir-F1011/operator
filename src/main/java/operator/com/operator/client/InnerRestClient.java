@@ -2,23 +2,20 @@ package operator.com.operator.client;
 
 import java.net.URI;
 
+import org.springframework.http.MediaType;
 import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
 
-import io.micrometer.common.lang.NonNull;
 import lombok.RequiredArgsConstructor;
 import operator.com.operator.models.dto.ItemsDto;
 
 public interface InnerRestClient {
-    ResponseEntity<Void> postRequest(@NonNull ItemsDto item, URI url);
-    
-    ResponseEntity<Void> deleteRequest(URI url);
-    
-    ResponseEntity<Void> patchRequest(@NonNull ItemsDto itemsDto, URI url);
+    ResponseEntity<Void> doRequest(HttpMethod method, URI url, ItemsDto body);
 
 }
 
@@ -29,34 +26,22 @@ class RestClient implements InnerRestClient {
     private final RestTemplate client = new RestTemplate();
 
     @Override
-    public ResponseEntity<Void> postRequest(@NonNull ItemsDto item, URI url) {
+    public ResponseEntity<Void> doRequest(HttpMethod method, URI url, ItemsDto body) {
         try {
-            return this.client.postForEntity(url, item, Void.class);
-        }catch (RestClientException e) {
-            throw new RuntimeException("Connection error ",e);
-        }
-        
-    }
+            HttpHeaders headers = new HttpHeaders();
+            headers.setContentType(MediaType.APPLICATION_JSON);
 
-    @Override
-    public ResponseEntity<Void> patchRequest(@NonNull ItemsDto itemsDto, URI url) {
-        try {
-            
-            HttpEntity<ItemsDto> entity = new HttpEntity<>(itemsDto);
-            return client.exchange(url, HttpMethod.PATCH, entity, Void.class);
+            HttpEntity<ItemsDto> requestEntity = new HttpEntity<>(body, headers);
+
+            return this.client.exchange(
+                    url,
+                    method,
+                    requestEntity,
+                    Void.class);
+
         } catch (RestClientException e) {
-            throw new RuntimeException("Connection error", e);
+            String errorMessage = String.format("Connection error during %s request to %s", method, url);
+            throw new RuntimeException(errorMessage, e);
         }
-
-    }
-
-    @Override
-    public ResponseEntity<Void> deleteRequest(URI url) {
-        try {
-            return client.exchange(url, HttpMethod.DELETE, null, Void.class);
-        } catch (RestClientException e) {
-            throw new RuntimeException("Connection error", e);
-        }
-
     }
 }

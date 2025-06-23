@@ -4,6 +4,7 @@ import java.net.URI;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.HttpMethod;
 import org.springframework.stereotype.Service;
 
 import org.springframework.util.StringUtils;
@@ -68,7 +69,7 @@ class Operator implements InnerOperator {
                     .product(resp.getProduct())
                     .build();
 
-            this.client.postRequest(item, URI.create(this.searchURL));
+           this.client.doRequest(HttpMethod.POST, URI.create(this.searchURL), item);
 
         } catch (Exception e) {
             throw new RuntimeException("Internal error");
@@ -81,7 +82,7 @@ class Operator implements InnerOperator {
     public void deleteItem(String itemId) {
         if (StringUtils.hasLength(itemId.trim())) {
             try {
-                this.client.deleteRequest(URI.create(String.format("{}/{}", this.searchURL, itemId.trim())));
+                this.client.doRequest(HttpMethod.DELETE, URI.create(String.format("{}/{}", this.searchURL, itemId.trim())), null);
 
             } catch (IllegalArgumentException e) {
                 throw new IllegalArgumentException("Id not found");
@@ -113,8 +114,7 @@ class Operator implements InnerOperator {
                     .total(resp.getTotal())
                     .build();
 
-            this.client.patchRequest(itemsDto,
-                    URI.create(String.format("{}/{}", this.searchURL, resp.getId().trim())));
+            this.client.doRequest(HttpMethod.PATCH, URI.create(String.format("{}/{}", this.searchURL, resp.getId().trim())),itemsDto);
 
         } catch (Exception e) {
             throw new RuntimeException("Internal error");

@@ -11,7 +11,7 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
-import operator.com.operator.models.dto.ShipmentsDto;
+import operator.com.operator.models.consts.Consts;
 
 @Entity
 @Table(name = "shipments")
@@ -23,42 +23,30 @@ import operator.com.operator.models.dto.ShipmentsDto;
 public class Shipments {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "id", updatable = false, nullable = false)
+    @Column(name = Consts.ID, updatable = false, nullable = false)
     private String id; 
 
-    @Column(name = "product")
+    @Column(name = Consts.PRODUCT)
     private String product;
 
-    @Column(name = "color")
+    @Column(name = Consts.COLOR)
     private String color; 
 
-    @Column(name = "category") 
+    @Column(name = Consts.CATEGORY) 
     private String category; 
 
-    @Column(name = "total")
+    @Column(name = Consts.TOTAL)
     private Integer total;
 
-    @Column(name = "name")
+    @Column(name = Consts.NAME)
     private String name;
 
-    @Column(name = "address")
+    @Column(name = Consts.ADDRESS)
     private String address; 
 
-    @Column(name = "descount")
+    @Column(name = Consts.DESCAOUNT)
     private Integer descount;
 
-    @Column(name = "payment")
+    @Column(name = Consts.PAYMENT)
     private Integer payment;
-
-    public void update(ShipmentsDto shipmentDto) {
-        this.address = shipmentDto.getAddress();
-        this.category = shipmentDto.getCategory();
-        this.color = shipmentDto.getColor();
-        this.descount = shipmentDto.getDescount();
-        this.name = shipmentDto.getName();
-        this.payment = shipmentDto.getPayment();
-        this.total = shipmentDto.getTotal();
-        this.product = shipmentDto.getProduct();
-    }
-
 }
