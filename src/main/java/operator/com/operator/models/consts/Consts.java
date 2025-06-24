@@ -13,6 +13,6 @@ public class Consts {
     public static final String MANUFACTURER = "manufacturer";
     public static final String TEL = "tel";
     public static final String ADDRESS = "address";
-    public static final String DESCAOUNT = "descount";
+    public static final String DISCAOUNT = "discount";
     public static final String PAYMENT = "payment";
 }

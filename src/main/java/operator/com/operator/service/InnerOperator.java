@@ -103,7 +103,7 @@ class Operator implements InnerOperator {
                 .color(shipment.getColor().trim())
                 .payment(shipment.getPayment())
                 .total(shipment.getTotal())
-                .descount(shipment.getDescount())
+                .discount(shipment.getDiscount())
                 .name(shipment.getName().trim())
                 .product(shipment.getProduct().trim())
                 .build();
