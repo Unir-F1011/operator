@@ -22,7 +22,7 @@ FROM eclipse-temurin:24-jre-alpine
 WORKDIR /app
 
 
-EXPOSE 3000
+EXPOSE 8082
 
 
 COPY --from=build /app/target/operator-0.0.1-SNAPSHOT.jar ./app.jar
