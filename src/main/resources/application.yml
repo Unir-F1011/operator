@@ -9,17 +9,17 @@ spring:
     driver-class-name: org.postgresql.Driver
 
   jpa:
-    show-sql: true 
+    show-sql: true
     hibernate:
-      ddl-auto: update 
+      ddl-auto: update
     properties:
       hibernate:
-        format-sql: true 
+        format-sql: true
     defer-datasource-initialization: true
-  
-  sql: 
-    init: 
-     mode: always
+
+  sql:
+    init:
+      mode: always
 
 server:
   port: ${SERVER_PORT}
@@ -30,11 +30,11 @@ eureka:
     service-url:
       defaultZone: ${EUREKA_URL}
   instance:
-    preferIpAddress: true
+    preferIpAddress: false
     hostname: ${SERVER_NAME}
 
 springdoc:
   api-docs:
-    enabled: true 
-  swagger-ui: 
+    enabled: true
+  swagger-ui:
     enabled: true

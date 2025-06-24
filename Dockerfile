@@ -25,7 +25,7 @@ WORKDIR /app
 EXPOSE 3000
 
 
-COPY --from=build /app/target/inventory-products-0.0.1-SNAPSHOT.jar ./app.jar
+COPY --from=build /app/target/operator-0.0.1-SNAPSHOT.jar ./app.jar
 
 
 ENTRYPOINT ["java", "-jar", "app.jar"]
