@@ -30,7 +30,7 @@ public interface InnerOperator {
 @Service
 @Slf4j
 class Operator implements InnerOperator {
-    @Value("${server.service-url}")
+    @Value("${server.serviceUrl}")
     private String searchURL;
 
     @Autowired

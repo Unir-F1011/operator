@@ -23,11 +23,11 @@ spring:
 
 server:
   port: ${SERVER_PORT}
-  service-url: ${SEARCH_SERVER}
+  serviceUrl: ${SEARCH_SERVER}
 
 eureka:
   client:
-    service-url:
+    serviceUrl:
       defaultZone: ${EUREKA_URL}
   instance:
     preferIpAddress: false
