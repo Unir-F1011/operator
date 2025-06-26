@@ -18,7 +18,7 @@ public class ItemsDto {
     private String product;
     private String color;
     private String category;
-    private Integer price;
+    private Double price;
     private String manufacturer;
     private Integer total;
 

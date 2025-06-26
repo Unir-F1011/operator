@@ -46,9 +46,9 @@ public class ShipmentsDto {
 
     @NotBlank(message = "It's required")
     @Min(0)
-    private Integer discount;
+    private Double discount;
 
     @NotBlank(message = "It's required")
     @Min(0)
-    private Integer payment;
+    private Double payment;
 }

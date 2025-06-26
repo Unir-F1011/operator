@@ -45,8 +45,8 @@ public class Shipments {
     private String address; 
 
     @Column(name = Consts.DISCAOUNT)
-    private Integer discount;
+    private Double discount;
 
     @Column(name = Consts.PAYMENT)
-    private Integer payment;
+    private Double payment;
 }

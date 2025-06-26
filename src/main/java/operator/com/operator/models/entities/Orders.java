@@ -38,7 +38,7 @@ public class Orders {
     private String category; 
 
     @Column(name = Consts.PRICE)
-    private Integer price;
+    private Double price;
 
     @Column(name = Consts.MANUFACTURER)
     private String manufacturer;

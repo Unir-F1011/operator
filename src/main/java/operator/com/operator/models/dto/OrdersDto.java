@@ -35,7 +35,7 @@ public class OrdersDto {
 
     @NotBlank(message = "It's required")
     @Min(0)
-    private Integer price;
+    private Double price;
 
     @NotBlank(message = "It's required")
     @Size(min = 3, max = 50)
