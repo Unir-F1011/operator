@@ -40,8 +40,8 @@ class RestClient implements InnerRestClient {
                     Void.class);
 
         } catch (RestClientException e) {
-            String errorMessage = String.format("Connection error during %s request to %s", method, url);
-            throw new RuntimeException(errorMessage, e);
+            System.out.printf("\nOutput: {} {} {}\n", method, url, body);
+            throw new RuntimeException(String.format("Connection error during"), e);
         }
     }
 }

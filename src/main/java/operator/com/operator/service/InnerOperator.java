@@ -69,7 +69,6 @@ class Operator implements InnerOperator {
                     .product(resp.getProduct())
                     .build();
 
-           System.out.printf("{} & {}", item, this.searchURL); 
            this.client.doRequest(HttpMethod.POST, URI.create(this.searchURL), item);
 
         } catch (Exception e) {
