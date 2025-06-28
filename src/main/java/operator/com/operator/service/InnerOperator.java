@@ -1,7 +1,7 @@
 package operator.com.operator.service;
 
 import java.net.URI;
-
+import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpMethod;
@@ -23,7 +23,7 @@ import operator.com.operator.repository.ShipmentRepository;
 public interface InnerOperator {
     Orders createOrder(OrdersDto order);
 
-    void deleteItem(String itemId);
+    void deleteItem(UUID itemId);
 
     Shipments createShipments(ShipmentsDto shipment);
 
@@ -67,7 +67,7 @@ class Operator implements InnerOperator {
                     .price(resp.getPrice())
                     .total(resp.getTotal())
                     .product(resp.getProduct())
-                    .id(resp.getId().toString().trim())
+                    .id(resp.getId())
                     .build();
 
            this.client.doRequest(HttpMethod.POST, URI.create(this.searchURL), item);
@@ -81,10 +81,10 @@ class Operator implements InnerOperator {
     }
 
     @Override
-    public void deleteItem(String itemId) {
-        if (StringUtils.hasLength(itemId.trim())) {
+    public void deleteItem(UUID itemId) {
+        if (StringUtils.hasLength(itemId.toString().trim())) {
             try {
-                this.client.doRequest(HttpMethod.DELETE, URI.create(String.format("%s/%s", this.searchURL, itemId.trim())), null);
+                this.client.doRequest(HttpMethod.DELETE, URI.create(String.format("%s/%s", this.searchURL, itemId.toString().trim())), null);
 
             } catch (IllegalArgumentException e) {
                 log.error("DeleteItem error", e);

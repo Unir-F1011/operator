@@ -1,5 +1,7 @@
 package operator.com.operator.models.dto;
 
+import java.util.UUID;
+
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
@@ -19,7 +21,7 @@ import lombok.ToString;
 @ToString
 public class OrdersDto {
 
-    private String id;
+    private UUID id;
 
     @NotBlank(message = "It's required")
     @Size(min=3, max = 50)

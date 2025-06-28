@@ -1,6 +1,7 @@
 package operator.com.operator.controller;
 
 import java.util.HashMap;
+import java.util.UUID;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -40,7 +41,7 @@ public class OperatorAPI {
     }
 
     @DeleteMapping("/v1/items/{itemId}")
-    public ResponseEntity<Object> deleteItem(@PathVariable String itemId) {
+    public ResponseEntity<Object> deleteItem(@PathVariable UUID itemId) {
         try {
             operator.deleteItem(itemId);
             HashMap <String, String> response = new HashMap<>();
