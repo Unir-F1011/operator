@@ -17,7 +17,9 @@ import lombok.ToString;
 @Builder
 @ToString
 public class ShipmentsDto {
-    
+
+    @NotBlank(message = "It's required") 
+    @Size(min = 2, max = 100)
     private String id;
 
     @NotBlank(message = "It's required")

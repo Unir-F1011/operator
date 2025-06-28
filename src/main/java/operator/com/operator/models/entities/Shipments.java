@@ -22,7 +22,6 @@ import operator.com.operator.models.consts.Consts;
 @ToString
 public class Shipments {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = Consts.ID, updatable = false, nullable = false)
     private String id; 
 

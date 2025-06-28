@@ -110,15 +110,16 @@ class Operator implements InnerOperator {
                 .discount(shipment.getDiscount())
                 .name(shipment.getName().trim())
                 .product(shipment.getProduct().trim())
+                .id(shipment.getId().trim())
                 .build();
 
         try {
-            Shipments resp = this.shipRepo.save(ship);
+            this.shipRepo.save(ship);
             ItemsDto itemsDto = ItemsDto.builder()
-                    .total(resp.getTotal())
+                    .total(ship.getTotal())
                     .build();
 
-            this.client.doRequest(HttpMethod.PATCH, URI.create(String.format("%s/%s", this.searchURL, resp.getId().trim())),itemsDto);
+            this.client.doRequest(HttpMethod.PATCH, URI.create(String.format("%s/%s", this.searchURL, ship.getId().trim())),itemsDto);
             
         } catch (Exception e) {
             log.error("CreateShipmets error", e);
