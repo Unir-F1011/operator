@@ -67,6 +67,7 @@ class Operator implements InnerOperator {
                     .price(resp.getPrice())
                     .total(resp.getTotal())
                     .product(resp.getProduct())
+                    .id(resp.getId().toString().trim())
                     .build();
 
            this.client.doRequest(HttpMethod.POST, URI.create(this.searchURL), item);
