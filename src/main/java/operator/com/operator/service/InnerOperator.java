@@ -114,12 +114,11 @@ class Operator implements InnerOperator {
                 .build();
 
         try {
-            this.shipRepo.save(ship);
             ItemsDto itemsDto = ItemsDto.builder()
                     .total(ship.getTotal())
                     .build();
-
             this.client.doRequest(HttpMethod.PATCH, URI.create(String.format("%s/%s", this.searchURL, ship.getId().toString().trim())),itemsDto);
+            this.shipRepo.save(ship);
             
         } catch (Exception e) {
             log.error("CreateShipmets error", e);
