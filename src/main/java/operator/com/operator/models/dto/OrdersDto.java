@@ -21,7 +21,7 @@ import lombok.ToString;
 @ToString
 public class OrdersDto {
 
-    private UUID id;
+    private String id;
 
     @NotBlank(message = "It's required")
     @Size(min=3, max = 50)

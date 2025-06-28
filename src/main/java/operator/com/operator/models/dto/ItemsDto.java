@@ -16,7 +16,7 @@ import lombok.ToString;
 @Builder
 @ToString
 public class ItemsDto {
-    private UUID id;
+    private String id;
     private String product;
     private String color;
     private String category;

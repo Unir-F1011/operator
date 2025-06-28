@@ -67,7 +67,7 @@ class Operator implements InnerOperator {
                     .price(resp.getPrice())
                     .total(resp.getTotal())
                     .product(resp.getProduct())
-                    .id(resp.getId())
+                    .id(resp.getId().toString().trim())
                     .build();
 
            this.client.doRequest(HttpMethod.POST, URI.create(this.searchURL), item);
@@ -110,7 +110,7 @@ class Operator implements InnerOperator {
                 .discount(shipment.getDiscount())
                 .name(shipment.getName().trim())
                 .product(shipment.getProduct().trim())
-                .id(shipment.getId())
+                .id(UUID.fromString(shipment.getId()))
                 .build();
 
         try {

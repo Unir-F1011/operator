@@ -22,7 +22,7 @@ public class ShipmentsDto {
 
     @NotBlank(message = "It's required") 
     @Size(min = 2, max = 100)
-    private UUID id;
+    private String id;
 
     @NotBlank(message = "It's required")
     @Size(min = 2, max = 50)
