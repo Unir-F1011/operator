@@ -12,6 +12,7 @@ import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import operator.com.operator.models.dto.ItemsDto;
 
 public interface InnerRestClient {
@@ -21,9 +22,10 @@ public interface InnerRestClient {
 
 @Service
 @RequiredArgsConstructor
+@Slf4j
 class RestClient implements InnerRestClient {
 
-    private final RestTemplate client = new RestTemplate();
+    private final RestTemplate client;
 
     @Override
     public ResponseEntity<Void> doRequest(HttpMethod method, URI url, ItemsDto body) {
@@ -40,7 +42,7 @@ class RestClient implements InnerRestClient {
                     Void.class);
 
         } catch (RestClientException e) {
-            System.out.printf("\nOutput: {} {} {}\n", method, url, body);
+            log.error("doRequest error", e);
             throw new RuntimeException(String.format("Connection error during"), e);
         }
     }

@@ -2,12 +2,14 @@ package operator.com.operator.service;
 
 import java.net.URI;
 
-import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpMethod;
 import org.springframework.stereotype.Service;
 
 import org.springframework.util.StringUtils;
+
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import operator.com.operator.client.InnerRestClient;
 import operator.com.operator.models.dto.ItemsDto;
@@ -27,20 +29,18 @@ public interface InnerOperator {
 
 }
 
+@RequiredArgsConstructor
 @Service
 @Slf4j
 class Operator implements InnerOperator {
     @Value("${server.serviceUrl}")
     private String searchURL;
 
-    @Autowired
-    private OrdersRepository orderRepo;
+    private final OrdersRepository orderRepo;
 
-    @Autowired
-    private ShipmentRepository shipRepo;
+    private final ShipmentRepository shipRepo;
 
-    @Autowired
-    private InnerRestClient client;
+    private final InnerRestClient client;
 
     @Override
     public Orders createOrder(OrdersDto order) {
@@ -72,6 +72,7 @@ class Operator implements InnerOperator {
            this.client.doRequest(HttpMethod.POST, URI.create(this.searchURL), item);
 
         } catch (Exception e) {
+            log.error("Create order", e);
             throw new RuntimeException("Internal error");
         }
 
@@ -82,11 +83,13 @@ class Operator implements InnerOperator {
     public void deleteItem(String itemId) {
         if (StringUtils.hasLength(itemId.trim())) {
             try {
-                this.client.doRequest(HttpMethod.DELETE, URI.create(String.format("{}/{}", this.searchURL, itemId.trim())), null);
+                this.client.doRequest(HttpMethod.DELETE, URI.create(String.format("%s/%s", this.searchURL, itemId.trim())), null);
 
             } catch (IllegalArgumentException e) {
+                log.error("DeleteItem error", e);
                 throw new IllegalArgumentException("Id not found");
             } catch (Exception e) {
+                log.error("DeleteItem error", e);
                 throw new RuntimeException("Internal error");
             }
         } else {
@@ -114,12 +117,13 @@ class Operator implements InnerOperator {
                     .total(resp.getTotal())
                     .build();
 
-            this.client.doRequest(HttpMethod.PATCH, URI.create(String.format("{}/{}", this.searchURL, resp.getId().trim())),itemsDto);
-
+            this.client.doRequest(HttpMethod.PATCH, URI.create(String.format("%s/%s", this.searchURL, resp.getId().trim())),itemsDto);
+            
         } catch (Exception e) {
+            log.error("CreateShipmets error", e);
             throw new RuntimeException("Internal error");
         }
 
-        return null;
+        return ship;
     }
 }
