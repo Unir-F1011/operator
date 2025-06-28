@@ -1,9 +1,9 @@
 package operator.com.operator.models.entities;
 
+import java.util.UUID;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
@@ -23,7 +23,7 @@ import operator.com.operator.models.consts.Consts;
 public class Shipments {
     @Id
     @Column(name = Consts.ID, updatable = false, nullable = false)
-    private String id; 
+    private UUID id; 
 
     @Column(name = Consts.PRODUCT)
     private String product;

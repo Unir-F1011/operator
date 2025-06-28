@@ -110,7 +110,7 @@ class Operator implements InnerOperator {
                 .discount(shipment.getDiscount())
                 .name(shipment.getName().trim())
                 .product(shipment.getProduct().trim())
-                .id(shipment.getId().trim())
+                .id(shipment.getId())
                 .build();
 
         try {
@@ -119,7 +119,7 @@ class Operator implements InnerOperator {
                     .total(ship.getTotal())
                     .build();
 
-            this.client.doRequest(HttpMethod.PATCH, URI.create(String.format("%s/%s", this.searchURL, ship.getId().trim())),itemsDto);
+            this.client.doRequest(HttpMethod.PATCH, URI.create(String.format("%s/%s", this.searchURL, ship.getId().toString().trim())),itemsDto);
             
         } catch (Exception e) {
             log.error("CreateShipmets error", e);
