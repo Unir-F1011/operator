@@ -23,7 +23,7 @@ import operator.com.operator.repository.ShipmentRepository;
 public interface InnerOperator {
     Orders createOrder(OrdersDto order);
 
-    void deleteItem(UUID itemId);
+    void deleteItem(String itemId);
 
     Shipments createShipments(ShipmentsDto shipment);
 
@@ -81,10 +81,10 @@ class Operator implements InnerOperator {
     }
 
     @Override
-    public void deleteItem(UUID itemId) {
-        if (StringUtils.hasLength(itemId.toString().trim())) {
+    public void deleteItem(String itemId) {
+        if (StringUtils.hasLength(itemId.trim())) {
             try {
-                this.client.doRequest(HttpMethod.DELETE, URI.create(String.format("%s/%s", this.searchURL, itemId.toString().trim())), null);
+                this.client.doRequest(HttpMethod.DELETE, URI.create(String.format("%s/%s", this.searchURL, itemId.trim())), null);
 
             } catch (IllegalArgumentException e) {
                 log.error("DeleteItem error", e);

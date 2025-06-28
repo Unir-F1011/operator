@@ -41,7 +41,7 @@ public class OperatorAPI {
     }
 
     @DeleteMapping("/v1/items/{itemId}")
-    public ResponseEntity<Object> deleteItem(@PathVariable UUID itemId) {
+    public ResponseEntity<Object> deleteItem(@PathVariable String itemId) {
         try {
             operator.deleteItem(itemId);
             HashMap <String, String> response = new HashMap<>();
