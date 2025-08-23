@@ -12,7 +12,7 @@ env:
   REGISTRY: >-
     ${{ secrets.ECR_ACCOUNT_ID }}.dkr.ecr.${{ secrets.AWS_REGION
     }}.amazonaws.com
-  IMAGE_NAME: operator
+  IMAGE_NAME: aws-operator
 jobs:
   build-push-deploy:
     runs-on: ubuntu-latest
